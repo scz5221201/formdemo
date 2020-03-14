@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.hzy.formdemo.dao.FormDao">
+
+    <resultMap type="org.hzy.formdemo.model.FormContent" id="FormContentMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="dep" column="dep" jdbcType="VARCHAR"/>
+        <result property="reason" column="reason" jdbcType="VARCHAR"/>
+        <result property="startTime" column="start_time" jdbcType="TIMESTAMP"/>
+        <result property="endTime" column="end_time" jdbcType="TIMESTAMP"/>
+        <result property="auditor" column="auditor" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="commitForm" keyProperty="id" useGeneratedKeys="true">
+        insert into formdemo.form_content(name, dep, reason, start_time, end_time, auditor )
+        values (#{formContent.name}, #{formContent.dep},#{formContent.reason}, #{formContent.startTime},#{formContent.endTime},#{formContent.auditor})
+    </insert>
+
+    <select id="getFormContentList" resultMap="FormContentMap">
+        select * from form_content order by id
+    </select>
+
+</mapper>
